@@ -2,4 +2,4 @@
 layout: home
 ---
 
-# Welcome to the CatChron KB!
+Welcome to the CatChron KB!
