@@ -9,5 +9,5 @@ github_username:  jekyll
 # Build settings
 markdown: kramdown
 remote_theme: jekyll/minima
-minima:
+jekyll/minima:
   skin: dark
