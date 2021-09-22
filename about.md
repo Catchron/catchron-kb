@@ -1,6 +1,7 @@
 ---
-layout: page
+layout: dark
 title: About
+example: "Text"
 ---
 
 
