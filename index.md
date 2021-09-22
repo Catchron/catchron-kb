@@ -1,5 +1,4 @@
 ---
-#  Comment
 layout: home
 ---
 
