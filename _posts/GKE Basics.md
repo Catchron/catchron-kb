@@ -8,12 +8,10 @@
  They make decision (like scheduling) and provide the control plane
  - One or more nodes
  In GCP's case these are VMs. They provide  the runtime environment. They also  provide t he resources of the cluster that can be used to run containers
- * Master:
-
-    <img src="https://i.imgur.com/p0128YT.png" alt="gke logo" width="500"/>
- * Node:
-
-     <img src="https://i.imgur.com/aw61EfE.png" alt="gke logo" width="500"/>
+ * Master:<br>
+   <img src="https://i.imgur.com/p0128YT.png" alt="gke logo" width="500"/>
+ * Node:<br>
+   <img src="https://i.imgur.com/aw61EfE.png" alt="gke logo" width="500"/>
 
 
  ## Pods
@@ -34,11 +32,11 @@
     * This means that we create a specification file that declares to GKE the objects that we want to create
     * These specification files are usually **yaml** files
     * GKE tries to make the **live** state match the state we've declared in the configuration file
-    * Example yaml file:
+    * Example yaml file:<br>
     <img src="https://i.imgur.com/JW39gA0.png" alt="gke logo" width="500"/>
     * When you re-apply the same file GKE does not duplicate the object as it is already live
-    * If we change the configuration GKE will update the object
-    <img src="https://media.giphy.com/media/eq8KmQExIuwsmiYAbV/giphy.gif" alt="gke logo" width="500"/>
+    * If we change the configuration GKE will update the object<br>
+    <img src="https://media.giphy.com/media/eq8KmQExIuwsmiYAbV/giphy.gif" width="500"/>
 
 
 ## Replica set
@@ -49,8 +47,21 @@
   * A specified number of pods
   * Logic to ensure availability
 * Not recommended to create ReplicaSets on their own - instead we use Deployments
+* Example:<br>
+We've got a replica set of 3 pods which are all the same. Those pods are split across 3 nodes to better utilize their resources. If one node drops from the cluster, the replica sets will re-create the missing pods in the other nodes to make sure they are exactly 3<br>
+<img src="https://media.giphy.com/media/jq3Vxz0NUNbKBxOsJJ/giphy.gif" width="500"/>
+
 
 ## Deployments
+* An **object** for logically mapping **Pods** and **ReplicaSets**
+* The desired state of a **Deployment** is **enforced** by the **Controller**
+* **Deployments** provide logic for **updating**, **rolling back**, and **scaling** deployments
+* They also provide **error checking** for rollouts
+* Deployments are defined by **yaml** files like any other object
+* Example file:<br>
+  <img src="https://i.imgur.com/p0dRDAe.png" width="500"/>
+* When you update your deployments with new specification, GKE creates a new set of your deployment first. Once  the new update is up - the Deployment deletes the older version:<br>
+<img src="https://media.giphy.com/media/Lp4FavzG7nRiThHqqv/giphy.gif" width="500"/>
 
 
 
@@ -58,14 +69,15 @@
 
 ----------------
 * The primary command for interacting with GKE is `kubectl`
-* **kubectl** needs to be configured  so it can  authenticate with the cluster:
+* **kubectl** needs to be configured  so it can  authenticate with the cluster:<br>
 `gcloud container clusters get-credentials [cluster name] --zone=[cluster zone]`
-* To get info for certain components:
-`kubectl get`
-Examples:
-`kubectl get nodes`
-`kubectl get pods`
-`kubectl get services`
+
+* To get info for certain components:<br>
+`kubectl get`<br>
+Examples:<br>
+`kubectl get nodes`<br>
+`kubectl get pods`<br>
+`kubectl get services`<br>
 
 * Dynamically  create deployment:<br>
 `kubectl create deployment [deployment name] --image [deployment image]`
@@ -84,3 +96,16 @@ Examples:
 
 * To attach to a container with a command line terminal:<br>
 `kubectl exec -it [pod name] -c [container name] -- /bin/bash`
+
+
+
+
+------------------
+Video to GIF:<br>
+https://ezgif.com/video-to-gif<br>
+Image uploads<br>
+https://imgur.com/user/Catchron/posts<br>
+GIF uploads<br>
+https://giphy.com/channel/Nagrimor
+Markdown Syntax<br>
+https://www.markdownguide.org/basic-syntax/#line-break-best-practices
