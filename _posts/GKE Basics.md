@@ -36,6 +36,7 @@
     * GKE tries to make the **live** state match the state we've declared in the configuration file
     * Example yaml file:
     <img src="https://i.imgur.com/JW39gA0.png" alt="gke logo" width="500"/>
+    
     * When you re-apply the same file GKE does not duplicate the object as it is already live
     * If we change the configuration GKE will update the object
     * <img src="https://media.giphy.com/media/eq8KmQExIuwsmiYAbV/giphy.gif" alt="gke logo" width="500"/>
