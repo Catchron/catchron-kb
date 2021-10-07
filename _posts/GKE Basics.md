@@ -68,7 +68,7 @@ Examples:
 `kubectl get services`
 * Dynamically  create deployment:
 `kubectl create deployment [deployment name] --image [deployment image]`
-* Exposing deployment to the outside world using a **service** :
+* Exposing deployment to the outside world using a **service** :  
 `kubectl expose deployment [deployment name] --port=[port number] --type=[deployment type]`
 * To apply an object file declaratively:
 `kubectl apply -f [file name].yaml` - with this we declare that we want a new pod. The `-f` options means "local file"
