@@ -67,20 +67,20 @@ Examples:
 `kubectl get pods`
 `kubectl get services`
 
-* Dynamically  create deployment:
+* Dynamically  create deployment:<br>
 `kubectl create deployment [deployment name] --image [deployment image]`
 
-* Exposing deployment to the outside world using a **service**:
+* Exposing deployment to the outside world using a **service**:<br>
 `kubectl expose deployment [deployment name] --port=[port number] --type=[deployment type]`
 
-* To apply an object file declaratively:
+* To apply an object file declaratively:<br>
 `kubectl apply -f [file name].yaml` - with this we declare that we want a new pod. The `-f` options means "local file"
 
-* To delete the declared object file:
+* To delete the declared object file:<br>
 `kubectl delete -f [file name].yaml`
 
-* To expose a pod without a **service** we need  to  port forward our pod to the command shell public port for web preview which is **8080** :
+* To expose a pod without a **service** we need  to  port forward our pod to the command shell public port for web preview which is **8080** :<br>
 `kubectl port-forward [pod name] 8080:80`
 
-* To attach to a container with a command line terminal:
+* To attach to a container with a command line terminal:<br>
 `kubectl exec -it [pod name] -c [container name] -- /bin/bash`
