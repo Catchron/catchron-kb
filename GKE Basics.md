@@ -60,7 +60,7 @@ We've got a replica set of 3 pods which are all the same. Those pods are split a
 * Deployments are defined by **yaml** files like any other object
 * Example file:<br>
   <img src="https://i.imgur.com/p0dRDAe.png" width="500"/> <br>
-  * When you update your deployments with new specification, GKE creates a new set of your deployment first. Once  the new update is up - the Deployment deletes the older version:<br>
+* When you update your deployments with new specification, GKE creates a new set of your deployment first. Once  the new update is up - the Deployment deletes the older version:<br>
 <img src="https://media.giphy.com/media/Lp4FavzG7nRiThHqqv/giphy.gif" width="500"/>
 
 
