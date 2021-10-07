@@ -58,12 +58,12 @@
 
 
 ----------------
-* The primary command for interacting with GKE is `kubectl`
-kubectl needs to be configured  so it can  authenticate with the cluster:
- `gcloud container clusters get-credentials [cluster name] --zone=[cluster zone]`
-* To get info for certain components:  
-`kubectl get`
- Examples:  
+* The primary command for interacting with GKE is `kubectl`.  
+**kubectl** needs to be configured  so it can  authenticate with the cluster:  
+`gcloud container clusters get-credentials [cluster name] --zone=[cluster zone]`
+* To get info for certain components:    
+`kubectl get`  
+*  Examples:  
  `kubectl get nodes`  
  `kubectl get pods`  
  `kubectl get services`
