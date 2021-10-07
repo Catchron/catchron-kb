@@ -36,10 +36,9 @@
     * GKE tries to make the **live** state match the state we've declared in the configuration file
     * Example yaml file:
     <img src="https://i.imgur.com/JW39gA0.png" alt="gke logo" width="500"/>
-    
     * When you re-apply the same file GKE does not duplicate the object as it is already live
     * If we change the configuration GKE will update the object
-    * <img src="https://media.giphy.com/media/eq8KmQExIuwsmiYAbV/giphy.gif" alt="gke logo" width="500"/>
+    <img src="https://media.giphy.com/media/eq8KmQExIuwsmiYAbV/giphy.gif" alt="gke logo" width="500"/>
 
 
 ## Replica set
@@ -58,24 +57,30 @@
 
 
 ----------------
-* The primary command for interacting with GKE is `kubectl`.  
-**kubectl** needs to be configured  so it can  authenticate with the cluster:  
+* The primary command for interacting with GKE is `kubectl`
+* **kubectl** needs to be configured  so it can  authenticate with the cluster:
 `gcloud container clusters get-credentials [cluster name] --zone=[cluster zone]`
-* To get info for certain components:    
-`kubectl get`  
-*  Examples:  
- `kubectl get nodes`  
- `kubectl get pods`  
- `kubectl get services`
-* Dynamically  create deployment:  
+* To get info for certain components:
+`kubectl get`
+Examples:
+`kubectl get nodes`
+`kubectl get pods`
+`kubectl get services`
+
+* Dynamically  create deployment:
 `kubectl create deployment [deployment name] --image [deployment image]`
-* Exposing deployment to the outside world using a **service** :    
+
+* Exposing deployment to the outside world using a **service**:
 `kubectl expose deployment [deployment name] --port=[port number] --type=[deployment type]`
-* To apply an object file declaratively:  
+
+* To apply an object file declaratively:
 `kubectl apply -f [file name].yaml` - with this we declare that we want a new pod. The `-f` options means "local file"
-* To delete the declared object file:  
+
+* To delete the declared object file:
 `kubectl delete -f [file name].yaml`
-* To expose a pod without a **service** we need  to  port forward our pod to the command shell public port for web preview which is **8080** :  
+
+* To expose a pod without a **service** we need  to  port forward our pod to the command shell public port for web preview which is **8080** :
 `kubectl port-forward [pod name] 8080:80`
-* To attach to a container with a command line terminal:  
+
+* To attach to a container with a command line terminal:
 `kubectl exec -it [pod name] -c [container name] -- /bin/bash`
