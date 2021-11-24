@@ -29,13 +29,13 @@ and<br>
 ``sudo yum install git``<br>
 
 
-* Install **Ansible on Debian Systems**:
-``sudo apt update``
-``sudo apt install software-properties-common``
-``sudo add-apt-repository --yes --update ppa:ansible/ansible``
-``sudo apt install ansible``
+* Install **Ansible on Debian Systems**:<br>
+``sudo apt update``<br>
+``sudo apt install software-properties-common``<br>
+``sudo add-apt-repository --yes --update ppa:ansible/ansible``<br>
+``sudo apt install ansible``<br>
 
-The primary Ansible configuration file is located in ``/etc/ansible/ansible.cfg``. Notable configurations there include:
+The primary Ansible configuration file is located in ``/etc/ansible/ansible.cfg``. Notable configurations there include:<br>
  * ``Default inventory configuration``
  * ``Default remote user``
 
@@ -111,7 +111,7 @@ The key's randomart image is:
 |/oE..            |
 +----[SHA256]-----+
 ```
-After the key was generated I coppied the key to the **Ansible Host 1** vm using the **ssh-copy-id** command and the IP address of the vm. Keep in mind that the same user must exist on both machines in order for this to work.
+After the key was generated I copied the key to the **Ansible Host 1** vm using the **ssh-copy-id** command and the IP address of the vm. Keep in mind that the same user must exist on both machines in order for this to work.
 ```
 ans@ansiblecontrol:~$ ssh-copy-id 192.168.56.3
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/ans/.ssh/id_rsa.pub"
@@ -127,7 +127,7 @@ and check to make sure that only the key(s) you wanted were added.
 ```
 This command will add the public key for ``ans@ansiblecontrol`` to ``/home/test/.ssh/authorized_keys`` for ``ans@ansiblehost1`` and you will be able to ssh with the ans user between those machines without providing a password.
 
-> Once this is done you must add the ans user on your **Ansible Host 1** to the **sudoers** file and make sure it can execute root commands without password. To do that you must add the ``ans ALL=(ALL) NOPASSWD: ALL`` to the ``sudoers`` file located in ``/etc/sudoers``. Add the line in the ``# User privilege specification`` field as seen below:
+> Once this is done you must add the ans user on your **Ansible Host 1** to the **sudoers** file and make sure it can execute root commands without password. To do that you must add the ``ans ALL=(ALL) NOPASSWD: ALL`` to the ``sudoers`` file located in ``/etc/sudoers``. Add the line in the ``# User privilege specification`` field as seen below:<br>
 <img src="https://i.imgur.com/l1BLu6T.gif" width="500"/><br>
 * Once this is done you should be good to go. Here is a list of all the items you must check:
   * Add an ``ansible`` user across all your Hosts
@@ -140,10 +140,10 @@ This command will add the public key for ``ans@ansiblecontrol`` to ``/home/test/
 **Ansible playbooks** are analogous to a bash script.
 For more information on Ansible ad-hoc commands visit the **[site](https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html)**.
 
-The basic syntax of an ad-hoc command is:
-``ansible [pattern] -m [module] -a "[module options]"``
-or
-``ansible [host] -b -m [module] -a "[arg1 arg2 argn]"``
+The basic syntax of an ad-hoc command is:<br>
+``ansible [pattern] -m [module] -a "[module options]"``<br>
+or<br>
+``ansible [host] -b -m [module] -a "[arg1 arg2 argn]"``<br>
 
 * ``host`` is a hot or host group defined in the Ansible inventory file
 * ``-b`` is for become sudo
