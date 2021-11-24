@@ -110,7 +110,7 @@ The key's randomart image is:
 |/oE..            |
 +----[SHA256]-----+
 ```
-After the key was generated I coppied the key to the **Ansible Host 1** vm using the **ssh-copy-id** command and the IP address of the vm. Keep in mind that the same user must exist on both machines in order for this to work. 
+After the key was generated I coppied the key to the **Ansible Host 1** vm using the **ssh-copy-id** command and the IP address of the vm. Keep in mind that the same user must exist on both machines in order for this to work.
 ```
 ans@ansiblecontrol:~$ ssh-copy-id 192.168.56.3
 /usr/bin/ssh-copy-id: INFO: Source of key(s) to be installed: "/home/ans/.ssh/id_rsa.pub"
@@ -132,3 +132,26 @@ This command will add the public key for ``ans@ansiblecontrol`` to ``/home/test/
   * Add an ``ansible`` user across all your Hosts
   * Generate and share an ssh key from your Control host to your other Hosts
   * Add the ``ansible`` user to the ``sudoers`` file for all the other Hosts
+
+## Ansible Ad-hoc commands
+
+**Ansible ad-hoc** commands are comparable to bash commands.
+**Ansible playbooks** are analogous to a bash script.
+For more information on Ansible ad-hoc commands visit the **[site](https://docs.ansible.com/ansible/latest/user_guide/intro_adhoc.html)**.
+
+The basic syntax of an ad-hoc command is:
+``ansible [pattern] -m [module] -a "[module options]"``
+or
+``ansible [host] -b -m [module] -a "[arg1 arg2 argn]"``
+
+* ``host`` is a hot or host group defined in the Ansible inventory file
+* ``-b`` is for become sudo
+* ``-m`` is for module and allows a command to be used on a module
+* ``-a`` allows for parameters' to be passed to the module
+
+Examples:
+* ``ansible anshost1 -m setup``
+* ``ansible anshost1 -m ping``
+* ``ansible anshost1 -b -m ansible.builtin.copy -a "src=/home/ans/ans-test.txt dest=/home/ans/"``
+* ``ansible anshost1 -b -m service -a "name=apache2 state=started"``
+* ``ansible anshost1 -b -m apt -a "name=apache2 state=latest"``
