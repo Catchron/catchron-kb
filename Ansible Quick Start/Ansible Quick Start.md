@@ -23,10 +23,11 @@ In order to install Ansible you must configure the **EPEL repository (RedHat Sys
  * Extra Packages for Enterprise Linux (or EPEL) is a Fedora Special Interest Group that creates, maintains, and manages a high quality set of additional packages for Enterprise Linux, including, but not limited to, Red Hat Enterprise Linux (RHEL), CentOS and Scientific Linux (SL), Oracle Linux (OL).
 
 
-* Install **Ansible on Red-Hat Systems**:
-``sudo yum install ansible``
-and
-``sudo yum install git``
+* Install **Ansible on Red-Hat Systems**:<br>
+``sudo yum install ansible``<br>
+and<br>
+``sudo yum install git``<br>
+
 
 * Install **Ansible on Debian Systems**:
 ``sudo apt update``
@@ -155,3 +156,5 @@ Examples:
 * ``ansible anshost1 -b -m ansible.builtin.copy -a "src=/home/ans/ans-test.txt dest=/home/ans/"``
 * ``ansible anshost1 -b -m service -a "name=apache2 state=started"``
 * ``ansible anshost1 -b -m apt -a "name=apache2 state=latest"``
+
+## Ansible Playbooks
