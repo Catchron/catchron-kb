@@ -167,3 +167,11 @@ Examples:
 * ``ansible anshost1 -b -m apt -a "name=apache2 state=latest"``
 
 ## Ansible Playbooks
+
+## Ansible Variables
+
+## Ansible Facts
+
+## Troubleshooting and Debugging
+
+## Ansible Handlers
