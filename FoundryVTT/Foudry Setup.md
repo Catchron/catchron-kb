@@ -23,13 +23,13 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 
 ----------------
 Ansible Modules to use:
-[apt – Manages apt-packages](https://docs.ansible.com/ansible/2.9/modules/apt_module.html#apt-module)
-[ansible.builtin.systemd – Manage systemd units](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)
-[ufw – Manage firewall with UFW](https://docs.ansible.com/ansible/2.9/modules/ufw_module.html#ufw-module)
-[user – Manage user accounts](https://docs.ansible.com/ansible/2.9/modules/user_module.html#user-module)
-[ansible.builtin.group – Add or remove groups](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html)
+[apt – Manages apt-packages](https://docs.ansible.com/ansible/2.9/modules/apt_module.html#apt-module)<br>
+[ansible.builtin.systemd – Manage systemd units](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)<br>
+[ufw – Manage firewall with UFW](https://docs.ansible.com/ansible/2.9/modules/ufw_module.html#ufw-module)<br>
+[user – Manage user accounts](https://docs.ansible.com/ansible/2.9/modules/user_module.html#user-module)<br>
+[ansible.builtin.group – Add or remove groups](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/group_module.html)<br>
 
-1. Install all of the required packages:<br>
+1. **Playbook:** Install all of the required packages:<br>
 
 
 
@@ -39,37 +39,36 @@ Ansible Modules to use:
 - hosts: webservers
   become: yes
   tasks:
-- name: Update all packages to the latest version
-  apt:
-    upgrade: dis
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
 
-- name: Install all of the required packages
-  apt:
-    pkg:
-    - apache2-utils
-    - docker.io
-    - docker-compose
+  - name: Install all of the required packages
+    apt:
+      pkg:
+      - apache2-utils
+      - docker.io
+      - docker-compose
 
-- name: Docker service is running
-  ansible.builtin.systemd:
-    name: docker
-    state: started
-    enabled: yes
-
-- name: Enable SSH, HTTP and HTTPS
-  ufw:
-    rule: allow
-    port: 80,443,222
-    proto: tcp
+  - name: Enable SSH, HTTP and HTTPS
+    ufw:
+      rule: allow
+      port: 80,443,222
+      proto: tcp
 # ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp"
 
-- name: add the user to the docker group
-  user:
-    name: ans
-    append: yes
-    groups: docker
+  - name: add a group for Docker
+    ansible.builtin.group:
+      name: docker
 
-- name: add a group for Docker
-  ansible.builtin.group:
-    name: docker
+  - name: add the user to the docker group
+    user:
+      name: ans
+      append: yes
+      groups: docker
+
+  - name: Docker service is running
+    ansible.builtin.systemd:
+      name: docker
+      enabled: yes
 ```
