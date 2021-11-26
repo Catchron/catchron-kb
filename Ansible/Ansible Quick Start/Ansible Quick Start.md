@@ -54,12 +54,11 @@ The Default Ansible Inventory File is ``/etc/ansible/hosts``. An inventory lis a
  * Can be specified by CLI: ``ansible -i``
  * Can be set in ``/etc/ansible/ansible.cfg``
 
->The **[hosts]()** file contains instructions on how to list you available hosts that can be manipulated by Ansible. You can input your list of hosts at the end of the file. You can simply input the hosts IP addresses as a list at end. For our example we will add the hosts and put them behind a variable so we dont have to type the IP every time when we reference the host:
-``anshost1 ansible_host=192.168.56.3``
-
->| The variable name      | Add this to connect the variable to a host | The host IP |
-| ----------- | ----------- |----------- |
-| anshost1      | ansible_host=       | 192.168.56.3       |
+>The **[hosts]()** file contains instructions on how to list you available hosts that can be manipulated by Ansible. You can input your list of hosts at the end of the file. You can simply input the hosts IP addresses as a list at end. For our example we will add the hosts and put them behind a variable so we dont have to type the IP every time when we reference the host:<br>
+``anshost1 ansible_host=192.168.56.3``<br>
+``anshost1`` :variable name:<br>
+``ansible_host=`` :this assoicates the variable to a host <br>
+``192.168.56.3`` :host IP or FQDN<br>
 
 >Example:
 
@@ -167,6 +166,76 @@ Examples:
 * ``ansible anshost1 -b -m apt -a "name=apache2 state=latest"``
 
 ## Ansible Playbooks
+
+Ansible playbooks are like bash scripts for Ansible. They are written in YAML and contain different elements called plays. Plays contain lists of hosts and tasks. Each task has a name and module. Modules have parameters. Spaces in those yaml files matter. Improper indentation can cause a playbook to err in a vague way.  
+
+Here is an example of an ansible playbook command:
+``ansible-playbook -i inv web.yml``<br>
+This cinnabd wukk exectute the ``web.yml playbook`` using the ``inv file`` for hosts inventory. Both of which are at the present location.
+
+Here is an example of how the web.yml playbook looks like:
+```
+---
+- hosts: webservers
+  become: yes
+
+  tasks:
+  - name: latest apache2 installed
+    apt
+      name: apache2
+      state: latest
+```
+Here is a braeakdown of what this playbook will do:
+1. The ``---`` lines mark this file as a YAML file
+2. It will look for all the hosts that have been marked as webservers in the **inv** file we specified in the command
+3. It will become **root**
+4. It will try to find the **apache2** program
+5. It will make sure that **apache2** is running on **latest** build
+
+Here is an example of an **inv** file. We do not have to have such a file. We can also list all our hosts in the /etc/ansible/hosts file. But you can also have a seperate file like in our case called **inv** which in our case lives in /home/ans/inv
+
+```
+[webservers]
+anshost1 ansible_host=192.168.56.3
+anshost2 ansible_host=192.168.56.4
+```
+This basically tagges all the hosts under the [webservers] as webservers. And we can reference them in our playbooks as such.
+
+Here is another example of a playbook yaml file.
+```
+---
+- hosts: webservers
+  become: yes
+
+  tasks:
+  - name: latest apache2 installed
+    apt
+      name: apache2
+      state: latest
+  - name: create index.html file
+    file:
+      name: /var/www/html/index.html
+      state: touch
+  - name: add web content
+    lineinfile:
+      line: "here is some text"
+      path: /var/www/html/index.html
+  - name: start apache2
+    service:
+    name: apache2
+    state: started
+```
+Here is a braeakdown of what this playbook will do:
+1. The ``---`` lines mark this file as a YAML file
+2. It will look for all the hosts that have been marked as webservers in the **inv** file we specified in the command
+3. It will become **root**
+4. It will try to find the **apache2** program
+5. It will make sure that **apache2** is running on **latest** build
+6. It will create the **index.html** file in **/var/www/html/index.html**
+7. It will add the **"here is some text"** line into the end of the **index.html**
+8. It will make sure that the **apache2 service** is running
+
+Each seperate module has its own required parameters. Best thing would be to look for the parameters in the Ansible documentation.
 
 ## Ansible Variables
 
