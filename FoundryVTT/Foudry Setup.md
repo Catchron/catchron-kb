@@ -35,7 +35,10 @@ Ansible Modules to use:
 
 ```
 ---
-# You need to add the become: yes
+
+- hosts: webservers
+  become: yes
+  tasks:
 - name: Update all packages to the latest version
   apt:
     upgrade: dis
@@ -54,19 +57,19 @@ Ansible Modules to use:
     enabled: yes
 
 - name: Enable SSH, HTTP and HTTPS
-ufw:
-  rule: allow
-  port: 80,443,222
-  proto: tcp
+  ufw:
+    rule: allow
+    port: 80,443,222
+    proto: tcp
 # ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp"
 
 - name: add the user to the docker group
-user:
-  name: ans
-  append: yes
-  groups: docker
+  user:
+    name: ans
+    append: yes
+    groups: docker
 
 - name: add a group for Docker
-ansible.builtin.group:
-  name: docker
+  ansible.builtin.group:
+    name: docker
 ```
