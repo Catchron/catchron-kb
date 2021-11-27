@@ -2,8 +2,10 @@ Video Instructions: https://youtu.be/1Mr5sWkPXSk
 Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 
 # Instructions:
+### [1. Installing the required packages]()
+### [2. Configuring and Running Traefik]()
 
-## Installing the required packages
+## 1. Installing the required packages
 
 1. Use the following command to install all of the required packages:<br>
 ``sudo apt update && sudo apt install apache2-utils docker.io docker-compose``<br>
@@ -43,6 +45,12 @@ Ansible Modules to use:<br>
     apt:
       upgrade: dist
 
+  - name: Docker service is running
+    ansible.builtin.systemd:
+      name: docker
+      enabled: yes
+      state: started
+
   - name: Install all of the required packages
     apt:
       pkg:
@@ -53,13 +61,8 @@ Ansible Modules to use:<br>
   - name: Enable SSH, HTTP and HTTPS
     ufw:
       rule: allow
-      port: 80,443,222
+      port: 80,443,22
       proto: tcp
-# ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp"
-
-  - name: add a group for Docker
-    ansible.builtin.group:
-      name: docker
 
   - name: add the user to the docker group
     user:
@@ -67,8 +70,31 @@ Ansible Modules to use:<br>
       append: yes
       groups: docker
 
-  - name: Docker service is running
-    ansible.builtin.systemd:
+  - name: add a group for Docker
+    ansible.builtin.group:
       name: docker
-      enabled: yes
+
+
+
+
 ```
+> Notes
+``ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp``
+
+
+## 2. Configuring and Running Traefik
+
+1. Generating a secure password. In the command below, substitute secure_password with the actual password that you want to use:<br>
+``htpasswd -nb admin secure_password``<br>
+
+2. The output will look something like this:<br>
+``admin:$apr1$ruca84Hq$mbjdMZBAG.KWn7vfN/SNK/``<br>
+
+Take note of the output, we will need it near the end of this step.<br>
+> If your string has any $ you will need to modify them to be $$ - this is because docker-compose uses $ to signify a variable. By adding $$ we still docker-compose that it’s actually a $ in the string and not a variable.
+
+3. Next up, we will start creating our config files. I recommend making a separate directory for each container. So, let’s make a folder and switch into it:<br>
+``mkdir traefik && cd traefik``<br>
+
+4. Now, let’s make our config file and start to edit it:<br>
+``nano traefik.yml``<br>
