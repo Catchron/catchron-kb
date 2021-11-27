@@ -24,7 +24,7 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 ``newgrp docker``<br>
 
 ----------------
-Ansible Modules to use:<br>
+### Ansible Modules to use:<br>
 [apt – Manages apt-packages](https://docs.ansible.com/ansible/2.9/modules/apt_module.html#apt-module)<br>
 [ansible.builtin.systemd – Manage systemd units](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/systemd_module.html)<br>
 [ufw – Manage firewall with UFW](https://docs.ansible.com/ansible/2.9/modules/ufw_module.html#ufw-module)<br>
@@ -98,3 +98,30 @@ Take note of the output, we will need it near the end of this step.<br>
 
 4. Now, let’s make our config file and start to edit it:<br>
 ``nano traefik.yml``<br>
+
+-----------
+### Ansible Modules to use:<br>
+[htpasswd – manage user files for basic authentication](https://docs.ansible.com/ansible/2.9/modules/htpasswd_module.html#htpasswd-module)
+
+```
+- name: python-passlib
+  apt:
+    name: python3-passlib
+    state: latest
+
+- name: Generate a Password
+  - htpasswd:
+    path: /home/ans/anshtpasswd
+    name: admin
+    password: dmpass
+    state: present
+```
+[lineinfile – Manage lines in text files](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module)
+```
+- lineinfile
+  path: /home/ans/anshtpasswd
+  insertafter: `$`
+  line: `$`
+```
+
+sed 's/\$/\$$/g' /etc/apache2/passwdfile
