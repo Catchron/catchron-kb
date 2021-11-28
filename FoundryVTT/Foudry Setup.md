@@ -125,7 +125,7 @@ Take note of the output, we will need it near the end of this step.<br>
     ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd
 ```
 
-ed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd
+``sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd``
 
 [ansible.builtin.file – Manage files and file properties](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
 
