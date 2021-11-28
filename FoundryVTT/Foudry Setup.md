@@ -116,12 +116,32 @@ Take note of the output, we will need it near the end of this step.<br>
     password: dmpass
     state: present
 ```
-[lineinfile – Manage lines in text files](https://docs.ansible.com/ansible/2.9/modules/lineinfile_module.html#lineinfile-module)
+[ansible.builtin.shell – Execute shell commands on targets](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/shell_module.html)
 ```
-- lineinfile
-  path: /home/ans/anshtpasswd
-  insertafter: `$`
-  line: `$`
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: line in file and replace the $ symbol
+    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd
 ```
 
 sed 's/\$/\$$/g' /etc/apache2/passwdfile
+
+[ansible.builtin.file – Manage files and file properties](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
+
+```
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: create the traefik folder- hosts: webservers
+  become: yes
+  tasks:
+  - name: create the traefik folder
+    ansible.builtin.file:
+      path: /home/ans/traefik
+      state: directory
+
+  - name: create the traefik yaml
+    ansible.builtin.file:
+      path: /home/ans/traefik/traefik.yml
+      state: touch
