@@ -3,7 +3,9 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 
 # Instructions:
 ### [1. Installing the required packages]()
-### [2. Configuring and Running Traefik]()
+### [2. Configuring and Running Traefik Part 1]()
+### [3. Configuring and Running Traefik Part 2]()
+
 
 ## 1. Installing the required packages
 
@@ -155,7 +157,7 @@ Take note of the output, we will need it near the end of this step.<br>
 
 --------------
 
-## 2. Configuring and Running Traefik Part 2
+## 3. Configuring and Running Traefik Part 2
 
 1. Modify the email address from email@example.com to a valid email address in traefik.yml. This is used for generating your SSL certificates.
 
