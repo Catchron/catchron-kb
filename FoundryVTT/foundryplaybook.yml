@@ -5,13 +5,9 @@
   tasks:
   - name: Update all packages to the latest version
     apt:
+      update_cache: yes
       upgrade: dist
-
-  - name: Docker service is running
-    ansible.builtin.systemd:
-      name: docker
-      enabled: yes
-      state: started
+      force_apt_get: yes
 
   - name: Install all of the required packages
     apt:
@@ -19,6 +15,12 @@
       - apache2-utils
       - docker.io
       - docker-compose
+
+  - name: Docker service is running
+    ansible.builtin.systemd:
+      name: docker
+      enabled: yes
+      state: started
 
   - name: Enable SSH, HTTP and HTTPS
     ufw:
@@ -42,19 +44,14 @@
       state: latest
 
   - name: Generate a Password
-    - htpasswd:
+    htpasswd:
       path: /home/ans/anshtpasswd
       name: admin
       password: dmpass
       state: present
 
   - name: line in file and replace the $ symbol
-    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswd
-
-  - name: create the foundry folder
-    ansible.builtin.file:
-      path: /home/ans/traefik
-      state: directory
+    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswdrdy
 
   - name: download the github repo for traefik and portainer
     ansible.builtin.git:
@@ -64,7 +61,7 @@
 
   - name: add pass file to variable
     slurp:
-      src: /etc/apache2/passwdfile
+      src: /home/ans/anshtpasswdrdy
     register: pass_key
 
   - name: decode
@@ -94,6 +91,10 @@
       path: /home/ans/foundry-vtt/portainer/docker-compose.yml
       regexp: (yourdomain.com)
       replace: catchron.com
+
+  - name: Create a network
+    docker_network:
+      name: proxy
 
   - name: docker compose for traefik
     docker_compose:
