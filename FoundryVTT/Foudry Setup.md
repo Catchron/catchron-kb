@@ -133,15 +133,24 @@ Take note of the output, we will need it near the end of this step.<br>
 - hosts: webservers
   become: yes
   tasks:
-  - name: create the traefik folder- hosts: webservers
+  - name: create the foundry folder
   become: yes
   tasks:
-  - name: create the traefik folder
+  - name: create the foundry folder
     ansible.builtin.file:
       path: /home/ans/traefik
       state: directory
 
-  - name: create the traefik yaml
-    ansible.builtin.file:
-      path: /home/ans/traefik/traefik.yml
-      state: touch
+[ansible.builtin.git – Deploy software (or files) from git checkouts](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html)
+
+```
+- hosts: webservers
+  become: yes
+    tasks:
+    - name: download the github repor for traefik and portainer
+      ansible.builtin.git:
+        repo: https://github.com/Catchron/dm-foundry-vtt.git
+        dest: /home/ans/foundry-vtt
+```
+
+--------------
