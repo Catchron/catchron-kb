@@ -82,7 +82,7 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 ``ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp``
 
 
-## 2. Configuring and Running Traefik
+## 2. Configuring and Running Traefik Part 1
 
 1. Generating a secure password. In the command below, substitute secure_password with the actual password that you want to use:<br>
 ``htpasswd -nb admin secure_password``<br>
@@ -154,3 +154,14 @@ Take note of the output, we will need it near the end of this step.<br>
 ```
 
 --------------
+
+## 2. Configuring and Running Traefik Part 2
+
+1. Modify the email address from email@example.com to a valid email address in traefik.yml. This is used for generating your SSL certificates.
+
+2. Replace Replace monitor.yourdomain.com with your own domain
+
+3. Replace the auth information from the first command we ran
+
+4. We’re nearly there. Now we need to create the docker network with a quick command:<br>
+``docker network create proxy``
