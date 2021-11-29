@@ -124,7 +124,7 @@ Take note of the output, we will need it near the end of this step.<br>
   become: yes
   tasks:
   - name: line in file and replace the $ symbol
-    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd
+    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswd
 ```
 
 ``sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd``
@@ -153,6 +153,7 @@ Take note of the output, we will need it near the end of this step.<br>
       ansible.builtin.git:
         repo: https://github.com/Catchron/dm-foundry-vtt.git
         dest: /home/ans/foundry-vtt
+        force: yes
 ```
 
 --------------
@@ -167,3 +168,38 @@ Take note of the output, we will need it near the end of this step.<br>
 
 4. We’re nearly there. Now we need to create the docker network with a quick command:<br>
 ``docker network create proxy``
+
+### Ansible Modules to use:<br>
+
+[ansible.builtin.slurp – Slurps a file from remote nodes](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/slurp_module.html)
+
+[ansible.builtin.replace – Replace all instances of a particular string in a file using a back-referenced regular expression](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/replace_module.html)
+
+```
+---
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: add pass file to variable
+    slurp:
+      src: /etc/apache2/passwdfile
+    register: pass_key
+  - name: decode
+    set_fact:
+      remote_content: "{{pass_key.content | b64decode}}"
+  - name: add email address
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/traefik.yml
+      regexp: (example@domain.com)
+      replace: admin@catchron.com
+  - name: change domain
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/docker-compose.yml
+      regexp: (yourdomain.com)
+      replace: catchron.com
+  - name: change keypassword
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/docker-compose.yml
+      regexp: (keypassword)
+      replace: "{{remote_content}}"
+```
