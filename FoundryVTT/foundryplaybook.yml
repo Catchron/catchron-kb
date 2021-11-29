@@ -91,6 +91,14 @@
 
   - name: change domain in portainer
     ansible.builtin.replace:
-    path: /home/ans/foundry-vtt/portainer/docker-compose.yml
-    regexp: (yourdomain.com)
-    replace: catchron.com
+      path: /home/ans/foundry-vtt/portainer/docker-compose.yml
+      regexp: (yourdomain.com)
+      replace: catchron.com
+
+  - name: docker compose for traefik
+    docker_compose:
+      project_src: /home/ans/foundry-vtt/traefik
+
+  - name: docker compose for portainer
+    docker_compose:
+      project_src: /home/ans/foundry-vtt/portainer

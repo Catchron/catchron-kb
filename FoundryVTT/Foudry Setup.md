@@ -102,6 +102,19 @@ Take note of the output, we will need it near the end of this step.<br>
 4. Now, let’s make our config file and start to edit it:<br>
 ``nano traefik.yml``<br>
 
+5. Assuming you’re still where we left off, let’s go back up 1 level of our directory path, create a new directory for portainer, and switch into it.<br>
+``cd .. && mkdir portainer && cd portainer``<br>
+
+6. Portainer will create a fair number of files and directories that it needs to persist between runs. Let’s make a directory for all that.<br>
+``mkdir data``<br>
+
+7. Now, we’re going to create our docker-compose config file.<br>
+``nano docker-compose.yaml``<br>
+
+8. Copy/paste the contents below. We have 2 lines to modify after.<br>
+
+
+
 -----------
 ### Ansible Modules to use:<br>
 [htpasswd – manage user files for basic authentication](https://docs.ansible.com/ansible/2.9/modules/htpasswd_module.html#htpasswd-module)
@@ -223,4 +236,25 @@ Take note of the output, we will need it near the end of this step.<br>
       name: proxy
 ```
 
+--------------
+
 ## 4. Configuring and Running Traefik and Portainer Part 3
+
+1. Run ``docker-compose up -d`` for traefik
+
+2. Run ``docker-compose up -d`` for portainer
+
+### 4. Ansible Modules to use:<br>
+
+[docker_compose – Manage multi-container Docker applications with Docker Compose](https://docs.ansible.com/ansible/2.9/modules/docker_compose_module.html#docker-compose-module)
+
+```
+- name: docker compose for traefik
+  docker_compose:
+    project_src: /home/ans/foundry-vtt/traefik
+
+- name: docker compose for portainer
+  docker_compose:
+    project_src: /home/ans/foundry-vtt/portainer
+
+```
