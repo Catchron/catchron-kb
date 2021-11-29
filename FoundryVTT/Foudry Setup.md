@@ -3,8 +3,9 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 
 # Instructions:
 ### [1. Installing the required packages]()
-### [2. Configuring and Running Traefik Part 1]()
-### [3. Configuring and Running Traefik Part 2]()
+### [2. Configuring and Running Traefik and Portainer Part 1]()
+### [3. Configuring and Running Traefik and Portainer Part 2]()
+### [4. Configuring and Running Traefik and Portainer Part 3]()
 
 
 ## 1. Installing the required packages
@@ -84,7 +85,7 @@ Written Instructions: https://benprice.dev/posts/fvtt-docker-tutorial/
 ``ansible anshost1 -b -m ufw -a "rule=allow port=80,443,222 proto=tcp``
 
 
-## 2. Configuring and Running Traefik Part 1
+## 2. Configuring and Running Traefik and Portainer Part 1
 
 1. Generating a secure password. In the command below, substitute secure_password with the actual password that you want to use:<br>
 ``htpasswd -nb admin secure_password``<br>
@@ -127,7 +128,7 @@ Take note of the output, we will need it near the end of this step.<br>
     ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswd
 ```
 
-``sed 's/\$/\$$/g' /home/ans/anshtpasswd >> /home/ans/anshtpasswd``
+``sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswd``
 
 [ansible.builtin.file – Manage files and file properties](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/file_module.html)
 
@@ -144,12 +145,12 @@ Take note of the output, we will need it near the end of this step.<br>
       state: directory
 
 [ansible.builtin.git – Deploy software (or files) from git checkouts](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/git_module.html)
-
+```
 ```
 - hosts: webservers
   become: yes
     tasks:
-    - name: download the github repor for traefik and portainer
+    - name: download the github repo for traefik and portainer
       ansible.builtin.git:
         repo: https://github.com/Catchron/dm-foundry-vtt.git
         dest: /home/ans/foundry-vtt
@@ -158,7 +159,7 @@ Take note of the output, we will need it near the end of this step.<br>
 
 --------------
 
-## 3. Configuring and Running Traefik Part 2
+## 3. Configuring and Running Traefik and Portainer Part 2
 
 1. Modify the email address from email@example.com to a valid email address in traefik.yml. This is used for generating your SSL certificates.
 
@@ -175,31 +176,51 @@ Take note of the output, we will need it near the end of this step.<br>
 
 [ansible.builtin.replace – Replace all instances of a particular string in a file using a back-referenced regular expression](https://docs.ansible.com/ansible/latest/collections/ansible/builtin/replace_module.html)
 
+[docker_network – Manage Docker networks](https://docs.ansible.com/ansible/2.9/modules/docker_network_module.html#docker-network-module)
+
+
 ```
 ---
 - hosts: webservers
   become: yes
   tasks:
+
   - name: add pass file to variable
     slurp:
       src: /etc/apache2/passwdfile
     register: pass_key
+
   - name: decode
     set_fact:
       remote_content: "{{pass_key.content | b64decode}}"
+
   - name: add email address
     ansible.builtin.replace:
       path: /home/ans/foundry-vtt/traefik/traefik.yml
       regexp: (example@domain.com)
       replace: admin@catchron.com
+
   - name: change domain
     ansible.builtin.replace:
       path: /home/ans/foundry-vtt/traefik/docker-compose.yml
       regexp: (yourdomain.com)
       replace: catchron.com
+
   - name: change keypassword
     ansible.builtin.replace:
       path: /home/ans/foundry-vtt/traefik/docker-compose.yml
       regexp: (keypassword)
       replace: "{{remote_content}}"
+
+  - name: change domain in portainer
+    ansible.builtin.replace:
+    path: /home/ans/foundry-vtt/portainer/docker-compose.yml
+    regexp: (yourdomain.com)
+    replace: catchron.com
+
+  - name: Create a network
+    docker_network:
+      name: proxy
 ```
+
+## 4. Configuring and Running Traefik and Portainer Part 3

@@ -1,0 +1,96 @@
+---
+
+- hosts: webservers
+  become: yes
+  tasks:
+  - name: Update all packages to the latest version
+    apt:
+      upgrade: dist
+
+  - name: Docker service is running
+    ansible.builtin.systemd:
+      name: docker
+      enabled: yes
+      state: started
+
+  - name: Install all of the required packages
+    apt:
+      pkg:
+      - apache2-utils
+      - docker.io
+      - docker-compose
+
+  - name: Enable SSH, HTTP and HTTPS
+    ufw:
+      rule: allow
+      port: 80,443,22
+      proto: tcp
+
+  - name: add the user to the docker group
+    user:
+      name: ans
+      append: yes
+      groups: docker
+
+  - name: add a group for Docker
+    ansible.builtin.group:
+      name: docker
+
+  - name: python-passlib
+    apt:
+      name: python3-passlib
+      state: latest
+
+  - name: Generate a Password
+    - htpasswd:
+      path: /home/ans/anshtpasswd
+      name: admin
+      password: dmpass
+      state: present
+
+  - name: line in file and replace the $ symbol
+    ansible.builtin.shell: sed 's/\$/\$$/g' /home/ans/anshtpasswd > /home/ans/anshtpasswd
+
+  - name: create the foundry folder
+    ansible.builtin.file:
+      path: /home/ans/traefik
+      state: directory
+
+  - name: download the github repo for traefik and portainer
+    ansible.builtin.git:
+      repo: https://github.com/Catchron/dm-foundry-vtt.git
+      dest: /home/ans/foundry-vtt
+      force: yes
+
+  - name: add pass file to variable
+    slurp:
+      src: /etc/apache2/passwdfile
+    register: pass_key
+
+  - name: decode
+    set_fact:
+      remote_content: "{{pass_key.content | b64decode}}"
+
+  - name: add email address
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/traefik.yml
+      regexp: (example@domain.com)
+      replace: admin@catchron.com
+
+  - name: change domain
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/docker-compose.yml
+      regexp: (yourdomain.com)
+      replace: catchron.com
+
+  - name: change keypassword
+    ansible.builtin.replace:
+      path: /home/ans/foundry-vtt/traefik/docker-compose.yml
+      regexp: (keypassword)
+      replace: "{{remote_content}}"
+
+  - name: change domain in portainer
+    ansible.builtin.replace:
+    path: /home/ans/foundry-vtt/portainer/docker-compose.yml
+    regexp: (yourdomain.com)
+    replace: catchron.com
