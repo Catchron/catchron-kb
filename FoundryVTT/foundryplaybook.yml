@@ -1,6 +1,6 @@
 ---
 
-- hosts: webservers
+- hosts: gcp
   become: yes
   tasks:
   - name: Update all packages to the latest version
