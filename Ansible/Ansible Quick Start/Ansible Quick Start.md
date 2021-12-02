@@ -235,12 +235,97 @@ Here is a braeakdown of what this playbook will do:
 7. It will add the **"here is some text"** line into the end of the **index.html**
 8. It will make sure that the **apache2 service** is running
 
-Each seperate module has its own required parameters. Best thing would be to look for the parameters in the Ansible documentation.
+Each separate module has its own required parameters. Best thing would be to look for the parameters in the Ansible documentation.
+
+Breaking down an ansible playbook command:<br>
+``ansible-playbook -i inventory_file playbook.yml``<br>
 
 ## Ansible Variables
 
+Variable can be scoped by group, host, or withing a playbook. They may be passed in via command line using the ``--extra-vars``, the ``-e`` flag, or defined within a playbook.
+
+CLI Example:
+``ansible-playbook service.yml -e "target_hosts=localhost target_service=http"``
+
+Playbook Example:
+```
+---
+hosts: webservers
+become: yes
+vars:
+  target_service: http
+  target_state: started
+tasks:
+  - name: Ensure target state
+    service:
+      name: "{{ target_service }}"
+      state: "{{ target_state}}"
+```
+
+Varibles are referenced using double curly braces. It is a good practice to wrap variable names or statements containing variable names in weak quotes:
+
+``hosts: "{{ my_host_variable }}"``
+
 ## Ansible Facts
+
+Ansible facts are various properties regarding a given remote system that Ansible is going to collect for us.
+
+You can use the **Setup** module to retrieve facts from a given host. <br>
+``ansible anshost1 -m setup``<br>
+
+The filter parameter takes regex to allow you to prune fact output. <br>
+``ansible anshost1 -m setup -a filter=*ipv4*``<br>
+
+Facts are gathered by default in the Ansible Playbook execution. Those facts can also be referenced as varibles in the playbook. The keyword ``gather_facts`` may be set in the playbook to change the fact gathering behavior.
+
+The ansible command output may be directed to a file using the ``--tree outputfile`` flag which may be helpful when working with facts.
 
 ## Troubleshooting and Debugging
 
+There are a couple of Ansible utilities that help us troubleshoot and debug
+
+* **The debug module** is used to print detailed information about in-progress play. It is very handy for troubleshooting. The ``debug`` module takes two primary parameters that are mutually exclusive:
+ * ``msg`` A message that is printed to STDOUT
+ * ``var`` A variable whose content is printed to STDOUT
+
+```
+- debug:
+    msg: "System {{ inventory_hostname }}" has uuid {{ ansible_product_uuid}}
+```
+
+* **The registered keyword** is used to store task output. Several attributes are available: ``return code``, ``stderr``, and ``stdout``
+
+The following play will store the results of the shell module in a variable named motd_contents:
+
+```
+- hosts: all
+  tasks:
+	- shell: cat/etc/motd
+	  register: motd_contents
+```
+
 ## Ansible Handlers
+
+Ansible provides a mechanism that allows an action to be flagged for execution when a task performs a change. By only executing certain tasks during a change, plays are more efficient. This mechanism is called a **handler**.
+
+A handler may be called using the ``notify`` ketword:
+
+```
+- name: tempalte config file
+  template:
+	  src: foo.conf
+		dest: /etc/foo.conf
+  notify:
+	  - restart memcached
+```
+
+No matter how many times a handler is flagged in a play, it only runs during the play's final phase. ``notify`` will only flag a handler if a task block makes changes. A handler may be defined similarly to tasks:
+
+```
+- name: restart memcached
+  service:
+	  name: memcached
+		state: restarted
+	listen: "restart cached services"
+
+```
