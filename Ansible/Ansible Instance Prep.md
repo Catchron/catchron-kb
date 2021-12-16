@@ -23,8 +23,8 @@ We are using 2 network Adapters in this case:
 * Edit the following yaml file:<br>
 ``sudo vim /etc/netplan/00-installer-config.yaml``
 * Add the following info for 192.168.56.2:<br>
-```
-network:
+
+```network:
   ethernets:
     enp0s3:
       dhcp4: true
@@ -32,8 +32,8 @@ network:
       dhcp4: false
       addresses: [192.168.56.2/24]
   version: 2
+```
 
-	```
 
 * Add the static IP to the hosts file:<br>
 ``sudo vim /etc/hosts``
