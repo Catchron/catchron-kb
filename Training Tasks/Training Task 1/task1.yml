@@ -3,9 +3,8 @@
   become: yes
   tasks:
   - name: update ubuntu
-    update_cache: yes
-    upgrade: dist
-    force_apt_get: yes
+    apt:
+      update_cache: yes
 
   - name: flush IP tables
     ansible.builtin.iptables:
