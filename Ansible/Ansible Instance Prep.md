@@ -32,6 +32,7 @@ network:
       dhcp4: false
       addresses: [192.168.56.2/24]
   version: 2
+
 	```
 
 * Add the static IP to the hosts file:<br>
