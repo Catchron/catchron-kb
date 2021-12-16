@@ -1,0 +1,39 @@
+---
+- hosts: anshosts
+  become: yes
+  tasks:
+  - name: update ubuntu
+    update_cache: yes
+    upgrade: dist
+    force_apt_get: yes
+
+  - name: flush IP tables
+    ansible.builtin.iptables:
+    flush: yes
+
+  - name: add loopback
+    ansible.builtin.iptables:
+    chain: INPUT
+    in_interface: lo
+    jump: ACCEPT
+
+  - name: add established connections
+    ansible.builtin.iptables:
+    chain: INPUT
+    ctstate: ESTABLISHED,RELATED
+    jump: ACCEPT
+
+  - name: add port 22
+    ansible.builtin.iptables:
+    chain: INPUT
+    protocol: tcp
+    destination_port: 22
+    jump: ACCEPT
+
+  - name: drop all other connections
+    ansible.builtin.iptables:
+    chain: INPUT
+    policy: DROP
+
+  - name: save firewall rules
+    ansible.builtin.shell: iptables-save
