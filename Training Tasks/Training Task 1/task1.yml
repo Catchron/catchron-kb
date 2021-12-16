@@ -2,9 +2,13 @@
 - hosts: anshosts
   become: yes
   tasks:
-  - name: update ubuntu
+  - name: update ubuntu and confirm iptables is present
     apt:
       update_cache: yes
+      name: iptables
+      state: latest
+
+## iptables save might need to be installed
 
   - name: flush IP tables
     ansible.builtin.iptables:
