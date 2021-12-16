@@ -54,9 +54,9 @@ Now that you have the VMs setup - we need to add the Ansible Users
 ``sudo adduser ans``
 
 2. Edit the sudoers file to allow the **ans** user to elevate permissions:<br>
-* Edit the sudoers file using:
+* Edit the sudoers file using:<br>
 ``sudo visudo``<br>
-or
+or<br>
 ``vim /etc/sudoers``<br>
 
 * Add the following line:<br>
