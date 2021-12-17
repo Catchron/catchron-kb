@@ -8,8 +8,13 @@
       update_cache: yes
       name:
       - iptables
-        # - iptables-save
+      - iptables-persistent
       state: latest
+
+  - name: set default policy to accept
+    ansible.builtin.iptables:
+      chain: INPUT
+      policy: ACCEPT
 
   - name: flush IP tables
     ansible.builtin.iptables:
@@ -31,7 +36,7 @@
     ansible.builtin.iptables:
       chain: INPUT
       protocol: tcp
-      destination_port: '22'
+      destination_port: 22
       jump: ACCEPT
 
   - name: drop all other connections
@@ -40,7 +45,7 @@
       policy: DROP
 
   - name: save firewall rules
-    ansible.builtin.shell: iptables-save
+    ansible.builtin.shell: sudo iptables-save > /etc/iptables/rules.v4
 
 # Task 1 - Step 2
 
@@ -52,7 +57,7 @@
   - name: disable root ssh
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
-      regexp: ^(# *)?PermitRootLogin
+      regexp: ^(# *)?PermitRootLogin( \w*$)
       replace: PermitRootLogin no
 
   - name: restart sshd service
