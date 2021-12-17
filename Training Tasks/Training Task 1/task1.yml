@@ -8,11 +8,11 @@
       update_cache: yes
       name:
       - iptables
-      - iptables-save
+        # - iptables-save
       state: latest
 
   - name: flush IP tables
-      ansible.builtin.iptables:
+    ansible.builtin.iptables:
       flush: yes
 
   - name: add loopback
@@ -31,7 +31,7 @@
     ansible.builtin.iptables:
       chain: INPUT
       protocol: tcp
-      destination_port: 22
+      destination_port: '22'
       jump: ACCEPT
 
   - name: drop all other connections
@@ -45,17 +45,19 @@
 # Task 1 - Step 2
 
   - name: make sure we have one admin
-    ansible.builtin.user
+    ansible.builtin.user:
       name: nagrimor
       group: sudo
 
   - name: disable root ssh
     ansible.builtin.replace:
       path: /etc/ssh/sshd_config
-      regexp: (*PermitRootLogin*)
+      regexp: ^(# *)?PermitRootLogin
       replace: PermitRootLogin no
 
   - name: restart sshd service
     ansible.builtin.systemd:
       name: sshd
       state: restarted
+
+# Task 1 - Step 3
