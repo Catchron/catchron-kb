@@ -21,6 +21,9 @@
  ``cat preseed.yaml | lxd init --preseed``
 
 ## LXC/LXD Storage Pools
+* LXC/LXD Uses two types of storage poools:
+  * Directory Storage (creates a disk image based on the size you define in your local directory)
+	* Block Storage (Uses a defined block storage)
 
 * Create pool<br>
 ``lxc storage create [pool] [driver]``
