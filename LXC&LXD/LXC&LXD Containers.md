@@ -16,3 +16,8 @@ In this example we are listing all containers and passing the ``-c`` flag to spe
 ``lxc image copy [<remote>:]<image> <remote>: [flags]``<br>
 <img src="https://i.imgur.com/9hyiiiV.gif" width="700"/><br>
 In this example we are copying the **images:alpine/3.12** to our **local** storage cache and giving it an alias name **alpine-3.12**.
+
+* To check your container configuration
+``lxc config show [<remote>:][<container>] [flags]``<br>
+<img src="https://i.imgur.com/7vUj2of.gif" width="700"/><br>
+In this example we are using a local container name. The output gives us the yaml file which is generated when we setup the container.

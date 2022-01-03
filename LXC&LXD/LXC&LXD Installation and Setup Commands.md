@@ -19,3 +19,5 @@
  6. Create a [preseed file]()
  * After these items a yaml file will be generatd which is our **preseed.yaml** file. Later we can use this yaml file if we want to configure another server to be exactly as this configuration. The command to use a preseed file is:<br>
  ``cat preseed.yaml | lxd init --preseed``
+
+* To check your current configuration
