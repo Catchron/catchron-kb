@@ -30,7 +30,7 @@
 <br><img src="https://i.imgur.com/e76OoyY.gif" width="500"/><br>
 Here we create a new storage pool without specifying a block device. It will create the pool as directory storage.<br>
 
-<br><img src="https://i.imgur.com/e76OoyY.gif" width="500"/><br>
+<img src="https://i.imgur.com/e76OoyY.gif" width="500"/><br>
 Here we create new storage pool and specify a block device from our list. The whole device will be used for containers.
 
 * Remove a pool <br>
