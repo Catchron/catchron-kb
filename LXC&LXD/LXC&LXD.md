@@ -25,6 +25,10 @@
   * Directory Storage (creates a disk image based on the size you define in your local directory)
 	* Block Storage (Uses a defined block storage)
 
+* List all pools<br>
+``lxc storage list``<br>
+<img src="https://i.imgur.com/R7Luy6q.gif" width="700"/><br>
+
 * Create pool<br>
 ``lxc storage create [pool] [driver]``<br>
 <img src="https://i.imgur.com/e76OoyY.gif" width="700"/><br>
@@ -41,12 +45,12 @@ Here we create new storage pool and specify a block device from our list. The wh
 * Output pool info<br>
 ``lxc storage info [pool]``<br>
 <img src="https://i.imgur.com/39ggGFA.gif" width="700"/><br>
-* List all pools<br>
-``lxc storage list``
+
 * Change a config value<br>
 ``lxc storage set [pool] [key] [value]``
 * Show YAML pool config<br>
 ``lxc storage show [pool]``<br>
 <img src="https://i.imgur.com/vwRGK1P.gif" width="700"/><br>
+
 * Remove a config value<br>
 ``lxc storage unset [pool] [key]``
