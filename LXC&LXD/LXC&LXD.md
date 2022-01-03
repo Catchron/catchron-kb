@@ -11,12 +11,12 @@
 ``lxd init``<br>
 
 - ``lxd init`` pompts for the following 6 items:
- 1. Enable/Disable Clustering
- 2. Configure Storage Pool (new or existing)
+ 1. Enable/Disable [Clustering]()
+ 2. Configure [Storage Pool]() (new or existing)
  3. Enable/Disable Metal-as-a-Service
- 4. Configure networking (new or existing)
+ 4. Configure [Networking]() (new or existing)
  5. Enable/Disable auto-updates for images
- 6. Create a preseed file
+ 6. Create a [preseed file]()
  * After these items a yaml file will be generatd which is our **preseed.yaml** file. Later we can use this yaml file if we want to configure another server to be exactly as this configuration. The command to use a preseed file is:<br>
  ``cat preseed.yaml | lxd init --preseed``
 
@@ -26,7 +26,13 @@
 	* Block Storage (Uses a defined block storage)
 
 * Create pool<br>
-``lxc storage create [pool] [driver]``
+``lxc storage create [pool] [driver]``<br>
+<br><img src="https://i.imgur.com/e76OoyY.gif" width="500"/><br>
+Here we create a new storage pool without specifying a block device. It will create the pool as directory storage.<br>
+
+<br><img src="https://i.imgur.com/e76OoyY.gif" width="500"/><br>
+Here we create new storage pool and specify a block device from our list. The whole device will be used for containers.
+
 * Remove a pool <br>
 ``lxc storage delete [pool]``
 * Edit a pool config<br>
