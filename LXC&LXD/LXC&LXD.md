@@ -1,9 +1,9 @@
 ## Installing LXC/LXD
 
-``sudo apt install lxc-utils ``
-``sudo snap install lxd --channel=3.0/stable``
-``sudo apt remove lxd lxd-client``
-``sudo usermod [user] -aG lxd``
+``sudo apt install lxc-utils``<br>
+``sudo snap install lxd --channel=3.0/stable``<br>
+``sudo apt remove lxd lxd-client``<br>
+``sudo usermod [user] -aG lxd``<br>
 
 ## Running LXD
 
