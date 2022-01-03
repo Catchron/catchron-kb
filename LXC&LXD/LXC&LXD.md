@@ -39,14 +39,14 @@ Here we create new storage pool and specify a block device from our list. The wh
 * Retrieve a config value<br>
 ``lxc storage get [pool] [key]``
 * Output pool info<br>
-``lxc storage info [pool]``
+``lxc storage info [pool]``<br>
 <img src="https://i.imgur.com/39ggGFA.gif" width="700"/><br>
 * List all pools<br>
 ``lxc storage list``
 * Change a config value<br>
 ``lxc storage set [pool] [key] [value]``
 * Show YAML pool config<br>
-``lxc storage show [pool]``
+``lxc storage show [pool]``<br>
 <img src="https://i.imgur.com/vwRGK1P.gif" width="700"/><br>
 * Remove a config value<br>
 ``lxc storage unset [pool] [key]``
