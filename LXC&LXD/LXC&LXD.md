@@ -42,7 +42,7 @@ Here we create new storage pool and specify a block device from our list. The wh
 You will need to remove any **profiles**, **images** or **containers**. Check the **lxc storage info** and the **lxc storage show**
 
 * Edit a pool config<br>
-``lxc storage edit [pool]``
+``lxc storage edit [pool]``<br>
 <img src="https://i.imgur.com/e76OoyY.gif" width="700"/><br>
 This opens a yaml file for the storage pool configuration.
 
