@@ -9,7 +9,6 @@ In this example we are creating a container based on the public image of **image
 ``lxc list [<remote>:] [<filter>...] [flags]``<br>
 <img src="https://i.imgur.com/koFBGGs.gif" width="700"/><br>
 In this example we are simply listing for all containers across all storage pools and profiles
-
 <img src="https://i.imgur.com/D5XIwU7.gif" width="700"/><br>
 In this example we are listing all containers and passing the ``-c`` flag to specify the columns we want to see (Name, Storage Pool, Profiles, State)
 
