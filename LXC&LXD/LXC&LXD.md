@@ -28,6 +28,7 @@
 * List all pools<br>
 ``lxc storage list``<br>
 <img src="https://i.imgur.com/R7Luy6q.gif" width="700"/><br>
+The "USED BY" value specifies the number of attributes that are using this storage pool. These attributes can be profiles, images or containers. Check the **lxc storage info** and the **lxc storage show** command.
 
 * Create pool<br>
 ``lxc storage create [pool] [driver]``<br>
