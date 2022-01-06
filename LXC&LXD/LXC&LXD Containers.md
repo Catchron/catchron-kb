@@ -38,9 +38,9 @@ Example: ``lxc config unset ethical-rooster boot.autostart``<br>
 ``lxc config device list [<remote>:]<container|profile> [flags]``<br>
 * To get the values for container device configuration keys:<br>
 ``lxc config device get [<remote>:]<container|profile> <device> <key> [flags]``<br>
-* To show full device configuration for containers or profiles:
+* To show full device configuration for containers or profiles:<br>
 ``lxc config device show [<remote>:]<container|profile> [flags]``<br>
 <img src="https://i.imgur.com/XyKbDaK.gif" width="700"/><br>
 In this example we are listing the devices for the **ethical-rooster** container - and those devices are **root**.<br> We are then checking which storage pool the root devices for the container is connected to - the storage pool named **lxd**.<br> Finally we are listing all the configuration for the device.
 
-  * What does the **root** device mean. 
+  * What does the **root** device mean.
