@@ -44,3 +44,26 @@ Example: ``lxc config unset ethical-rooster boot.autostart``<br>
 In this example we are listing the devices for the **ethical-rooster** container - and those devices are **root**.<br> We are then checking which storage pool the root devices for the container is connected to - the storage pool named **lxd**.<br> Finally we are listing all the configuration for the device.
 
   * What does the **root** device mean.
+
+* To access the **shell** on your server:<br>
+``lxc exec [<remote>:]<container> [flags] [--] <command line>``<br>
+<img src="https://i.imgur.com/V7T2Hca.gif" width="700"/><br>
+In this example, we are accessing the **bash shell** on our **renewing-mackerel** container which uses **Ubuntu 18.04** Image.<br>
+  * The shell will depend on the distro image you are using. For Alpine Example:<br> ``lxc exec ethical-rooster -- ash``
+* Using the same command you can also pass commands to the container without actually accessing its **shell**:<br>
+<img src="https://i.imgur.com/aqIA7NS.gif" width="700"/><br>
+In this example we are directly installing **Nginx** to our **Ubuntu 18.04** container.
+* If you want to chain multiple commands (with ``&&``) or pipe them (with ``|``) you will need to pass the ``sh -c`` argument and enclose the commands in quotes.<br>
+``lxc exec [<remote>:]<container> [flags] [--] sh -c '<command line>'``<br>
+<img src="https://i.imgur.com/yqAq7Bg.gif" width="700"/><br>
+In this example we are chainin the two commands to **start** the **nginx** service and **enable** it on boot.
+
+* To stop a container:<br>
+``lxc stop [<remote>:]<container> [[<remote>:]<container>...] [flags]``<br>
+Example:<br>
+``lxc stop renewing-mackerel``
+
+* To delete a container:<br>
+``lxc delete [<remote>:]<container>[/<snapshot>] [[<remote>:]<container>[/<snapshot>]...] [flags]``<br>
+Example:<br>
+``lxc delete renewing-mackerel``
