@@ -20,4 +20,27 @@ In this example we are copying the **images:alpine/3.12** to our **local** stora
 * To check your container configuration
 ``lxc config show [<remote>:][<container>] [flags]``<br>
 <img src="https://i.imgur.com/7vUj2of.gif" width="700"/><br>
-In this example we are using a local container name. The output gives us the yaml file which is generated when we setup the container.
+In this example we are using a local container name. The output gives us the yaml file which is generated when we setup the container. The output shows the different keys/values that are set for this container
+
+* To see a specific key/value for a container:<br>
+``lxc config get [<remote>:][<container>] <key> [flags]``
+* To change a specific key/value for a container:<br>
+``lxc config set [<remote>:][<container>] <key> <value> [flags]``<br>
+<img src="https://i.imgur.com/mKA6Rh3.gif" width="700"/><br>
+In this example we are changing the **boot.autostart** key to **false** - which will prevent the container from starting at boot. We are then checking the state for the **boot.autostart** key to confirm.<br>
+Check the list of the [currently supported keys](https://linuxcontainers.org/lxd/docs/master/instances/#key-value-configuration) at the **linuxcontainers.org** site.
+
+* To change a specific key/value back to its default state:<br>
+``lxc config unset [<remote>:][<container>] <key> [flags]``<br>
+Example: ``lxc config unset ethical-rooster boot.autostart``<br>
+
+* To list the devices configured for your container:<br>
+``lxc config device list [<remote>:]<container|profile> [flags]``<br>
+* To get the values for container device configuration keys:<br>
+``lxc config device get [<remote>:]<container|profile> <device> <key> [flags]``<br>
+* To show full device configuration for containers or profiles:
+``lxc config device show [<remote>:]<container|profile> [flags]``<br>
+<img src="https://i.imgur.com/XyKbDaK.gif" width="700"/><br>
+In this example we are listing the devices for the **ethical-rooster** container - and those devices are **root**.<br> We are then checking which storage pool the root devices for the container is connected to - the storage pool named **lxd**.<br> Finally we are listing all the configuration for the device.
+
+  * What does the **root** device mean. 
