@@ -5,7 +5,7 @@ https://serverspace.io/support/help/configuring-the-network-interface-in-ubuntu-
 In Virtual Box make sure you add a "Host Only Adapter"
 https://www.wpdiaries.com/virtualbox-for-web-development/
 
-Checking your IP Address:<br>
+Checking your IP Addresses:<br>
 ``ip addr show``<br>
 
 Change your localhost name:<br>
