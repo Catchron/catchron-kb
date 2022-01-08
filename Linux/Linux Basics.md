@@ -34,3 +34,19 @@ To edit the sudoers file:<br>
 
 List Block Devices:<br>
 ``lsblk``<br>
+
+Check your OS version:<br>
+``lsb_release -a``<br>
+
+Check the version of your kernel:<br>
+``uname -r``
+
+Red Hat Enterprise:<br>
+**Desktop:** GNOME<br>
+**Package Manager:** RPM<br>
+**Init Software:** systemd<br>
+
+Ubuntu:<br>
+**Desktop:** GNOME<br>
+**Package Manager:** DEB<br>
+**Init Software:** systemd<br>
