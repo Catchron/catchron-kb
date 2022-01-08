@@ -2,6 +2,9 @@
 Configuring the network interface in Ubuntu 18.04
 https://serverspace.io/support/help/configuring-the-network-interface-in-ubuntu-18-04/?attempt=1
 
+In Virtual Box make sure you add a "Host Only Adapter"
+https://www.wpdiaries.com/virtualbox-for-web-development/
+
 Checking your IP Address:<br>
 ``ip addr show``<br>
 
