@@ -67,3 +67,23 @@ Example:<br>
 ``lxc delete [<remote>:]<container>[/<snapshot>] [[<remote>:]<container>[/<snapshot>]...] [flags]``<br>
 Example:<br>
 ``lxc delete renewing-mackerel``
+
+* To edit a file in a container:<br>
+``lxc file edit [<remote>:]<container>/<path> [flags]``<br>
+<img src="https://i.imgur.com/6Zd02NV.gif" width="700"/><br>
+In this example we are editing the **default** file at its location on the **web01** container.
+
+* To pull a file from a container to your host machine:<br>
+``lxc file pull [<remote>:]<container>/<path> [[<remote>:]<container>/<path>...] <target path> [flags]``<br>
+<img src="https://i.imgur.com/TKewPS7.gif" width="700"/><br>
+In this example we are pulling the same default file to our home folder.
+
+* To push a file from your host into a container:<br>
+``lxc file push <source path> [<remote>:]<container>/<path> [[<remote>:]<container>/<path>...] [flags]``<br>
+<img src="https://i.imgur.com/TKewPS7.gif" width="700"/><br>
+In this example we are pushing the **intrasite** file to our **web01** container in the ``/etc/nginx/sites-available/`` directory.
+
+* To remove a file from a container:<br>
+``lxc file delete [<remote>:]<container>/<path> [[<remote>:]<container>/<path>...] [flags]``<br>
+<img src="https://i.imgur.com/TKewPS7.gif" width="700"/><br>
+In this example we are deleting the **intrasite** file from our **web01** container.
