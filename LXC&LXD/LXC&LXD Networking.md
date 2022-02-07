@@ -13,4 +13,4 @@ In this example we can see our two containers and the two veth pair adapters tha
 <img src="https://i.imgur.com/WvrXbfc.gif" width="700"/><br>
 In this example we can see the **veth** pair between the host and container. We use ``lxc exec`` to jump to our ubuntu container and run ``ip a`` to check the available adapters.<br>
 
-* The LXC containers can communicate between the host and each other - depending on your network brdige setup.
+* The LXC containers can communicate between the host and each other - depending on your network bridge setup.
