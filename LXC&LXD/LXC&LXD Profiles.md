@@ -33,3 +33,8 @@ In this example we are assigning the **test-profile** to the **eager-liger** con
 * Profiles can be applied to different containers. One container can have multiple profiles assigned to it. If we've set specific configuration to a profile - that container will adopt this configuration.<br>
 <img src="https://i.imgur.com/SedzAA0.gif" width="700"/><br>
 In this example we are setting the **RAM limit** for the **test-profile** to 1GB. The **eager-lifer** container has the **test-profile** assigned to it. Once we jump to the container and check the available memory we can see that the total is set to 1GB. The profile configuration changes are adopted by the containers in real time.
+
+* To manually edit a profile:<br>
+``lxc profile edit [<remote>:]<profile> [flags]``<br>
+<img src="https://i.imgur.com/fwiePUx.gif" width="700"/><br>
+In this example we are adding a new storage pool under the devices section. All containers that have this profile assigned will also use this storage pool.
