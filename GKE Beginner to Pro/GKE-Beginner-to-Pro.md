@@ -18,7 +18,7 @@
   * [Demo: Monitoring, Logging, and Debugging](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#demo-monitoring-logging-and-debugging---video-link)
 * Deploying Applications
   * [Putting it all Together: Stateless Application Example](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#demo-putting-it-all-together---video-link)
-  * [Pod Reliability with Health Checks](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#pod-reliability-with-health-checks---video-link) 
+  * [Pod Reliability with Health Checks](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#pod-reliability-with-health-checks---video-link)
   * [External Services](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#accessing-external-services---video-link)
   * [Demo: Maintaining a Service with Unhealthy Pods](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#demo-maintaining-a-service-with-unhealthy-pods---video-link)
   * [Volumes and Persistent Storage](https://github.com/Catchron/catchron-kb/blob/main/GKE%20Beginner%20to%20Pro/GKE-Beginner-to-Pro.md#volumes-and-persistent-storage---video-link)
@@ -137,7 +137,8 @@
 `docker build -t myapp .`
 
 
-* A visualization of what our image looks like once it is built:<br><img src="https://i.imgur.com/0eJYJ0N.gif" width="500"/><br>
+* A visualization of what our image looks like once it is built:<br>
+<img src="https://i.imgur.com/0eJYJ0N.gif" width="500"/><br>
   * The layers are in reverse order
   * Docker is building up - adding layers from the bottom to the top
   * Each layer gets a unique ID
