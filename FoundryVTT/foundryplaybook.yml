@@ -15,7 +15,7 @@
       - apache2-utils
       - docker.io
       - docker-compose
-
+ =
   - name: Docker service is running
     ansible.builtin.systemd:
       name: docker
