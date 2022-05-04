@@ -32,6 +32,9 @@ To edit the sudoers file:<br>
 * To add no password for a sudo user:<br>
 ``username  ALL=(ALL) NOPASSWD:ALL``<br>
 
+Add users to the sudo group<br>
+``usermod -aG sudo username``<br>
+
 List Block Devices:<br>
 ``lsblk``<br>
 
@@ -40,6 +43,9 @@ Check your OS version:<br>
 
 Check the version of your kernel:<br>
 ``uname -r``
+
+Search for installed package name:<br>
+``dpkg -l | grep [name]``
 
 Red Hat Enterprise:<br>
 **Desktop:** GNOME<br>
