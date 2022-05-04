@@ -1,0 +1,19 @@
+{
+  "unversionedId": "Hello",
+  "id": "Hello",
+  "title": "Hello",
+  "description": "Test Hello",
+  "source": "@site/docs/Hello.md",
+  "sourceDirName": ".",
+  "slug": "/Hello",
+  "permalink": "/docs/Hello",
+  "editUrl": "https://github.com/facebook/docusaurus/tree/main/packages/create-docusaurus/templates/shared/docs/Hello.md",
+  "tags": [],
+  "version": "current",
+  "frontMatter": {},
+  "sidebar": "tutorialSidebar",
+  "previous": {
+    "title": "Translate your site",
+    "permalink": "/docs/tutorial-extras/translate-your-site"
+  }
+}
